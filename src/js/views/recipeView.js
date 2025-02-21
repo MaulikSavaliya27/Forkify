@@ -1,11 +1,12 @@
-import { Fraction } from 'fractional';
+// @ts-nocheck
+const Fraction = require('fractional').Fraction;
 import View from './view.js';
 
 import icons from 'url:../../img/icons.svg';
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
-  _errorMessage = `we could not find the recipe you wanted.please try another one!`;
+  _errorMessage = `we could not find the recipe you wanted. please try another one!`;
   _message = ``;
 
   addHandlerRender(handle) {
@@ -59,14 +60,14 @@ class RecipeView extends View {
       <span class="recipe__info-text">servings</span>
 
       <div class="recipe__info-buttons">
-        <button class="btn--tiny btn--update-servings" data-update-to = "${
+        <button class="btn--tiny btn--update-servings" data-update-to="${
           this._data.servings - 1
         }">
           <svg>
             <use href="${icons}#icon-minus-circle"></use>
           </svg>
         </button>
-        <button class="btn--tiny btn--update-servings" data-update-to = "${
+        <button class="btn--tiny btn--update-servings" data-update-to="${
           this._data.servings + 1
         }">
           <svg>
@@ -121,22 +122,20 @@ class RecipeView extends View {
   }
 
   _generateMarkupIngredients(ing) {
-    {
-      return `
-      <li class="recipe__ingredient">
-        <svg class="recipe__icon">
-          <use href="${icons}#icon-check"></use>
-        </svg>
-        <div class="recipe__quantity">${
-          ing.quantity ? new Fraction(ing.quantity).toString() : ''
-        }</div>
-        <div class="recipe__description">
-          <span class="recipe__unit">${ing.unit}</span>
-          ${ing.description}
-        </div>
-      </li>
-      `;
-    }
+    return `
+    <li class="recipe__ingredient">
+      <svg class="recipe__icon">
+        <use href="${icons}#icon-check"></use>
+      </svg>
+      <div class="recipe__quantity">${
+        ing.quantity ? new Fraction(ing.quantity).toString() : ''
+      }</div>
+      <div class="recipe__description">
+        <span class="recipe__unit">${ing.unit}</span>
+        ${ing.description}
+      </div>
+    </li>
+    `;
   }
 }
 
